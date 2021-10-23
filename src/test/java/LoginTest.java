@@ -7,6 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginTest {
     WebDriver wd;
 
@@ -14,6 +16,7 @@ public class LoginTest {
     public void init(){
         wd=new ChromeDriver();
         wd.navigate().to("https://contacts-app.tobbymarshall815.vercel.app/home");
+        wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
     @Test
     public void loginPositiveTest()
@@ -35,7 +38,7 @@ passwordInput.sendKeys("Nnoa12345$");
 wd.findElement(By.xpath("//button[1]")).click();
 
  //Assert if button logout is present
-        Assert.assertTrue(wd.findElements(By.xpath("//button[text()='Sign Out']")).size()>0);
+        Assert.assertTrue(wd.findElements( By.xpath("//button[text()='Sign Out']")).size()>0);
     }
 
     @AfterMethod
