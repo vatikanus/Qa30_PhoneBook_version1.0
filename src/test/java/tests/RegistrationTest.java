@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 public class RegistrationTest extends TestBase {
@@ -28,6 +29,7 @@ public class RegistrationTest extends TestBase {
 
         //Assert.assertTrue(isElementPresent(By.xpath("//button[text()='Sign Out']")));
         //Assert.assertTrue(app.getUser().isElementPresent());
+        Assert.assertTrue(app.getUser().isLogged());
     }
     @Test
     public void registrationTestWrongEmail()
@@ -35,6 +37,16 @@ public class RegistrationTest extends TestBase {
         int i =(int)(System.currentTimeMillis()/1000)%3600;
         String email = "nik"+ i + "gmail.com";
         String password = "Nik12345$";
-        System.out.println("Email:"+ email);}
+        System.out.println("Email:"+ email);
+
+        app.getUser().openLoginRegistrationForm();
+        app.getUser().fillLoginRegistrationForm(email,password);
+        app.getUser().subnitRegistration();
+        app.getUser().pause(2000);
+
+        Assert.assertTrue(app.getUser().isAlertPresent());
+
+    }
+
 
     }
